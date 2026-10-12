@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tests</title>
+</head>
+<body>
+    <h1>Validator tests</h1>
+    <ul id="results"></ul>
+    <script type="module">
+        import{ isValidAmount, isValidDescription, isValidDate, isValidCategory, hasNoDuplicateWords} from "./scripts/validators.js";
+        function check(name, actual, expected) {
+            const li = document.createElement("li");
+            li.textContent = (actual === expected ? "PASS: " : "FAIL: ") + name;
+            document.querySelector("#results").appendChild(li);
+        }
+        check("amount accepts 12.50", isValidAmount("12.50"), true);
+        check("amount rejects 1.500", isValidAmount("1.500"), false);
+
+        check("description accepts Breakfast", isValidDescription("Breakfast"), true);
+        check("descrption rejects Breakfast ", isValidDescription("Breakfast "), false);
+
+        check("date accepts 2010-05-31", isValidDate("2010-05-31"), true);
+        check("date rejects 13-31-2010", isValidDate("13-31-2010"), false);
+
+        check("category accepts Food", isValidCategory("Food"), true);
+        check("category rejects Food & Drink", isValidCategory("Food & Drink"), false);
+
+        check("descirption accepts Breakfast at cafe", hasNoDuplicateWords("Breakfast at cafe"), true);
+        check("description rejects Breakfast Breakfast", hasNoDuplicateWords("Breakfast Breakfast"), false);
+    </script>
+</body>
+</html>
