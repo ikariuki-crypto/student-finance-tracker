@@ -22,6 +22,17 @@ for (const cat in counts) {
     if (top === "none" || counts[cat] > counts[top]) top = cat;
 }
 document.querySelector("#stat-top").textContent = top;
+const cap = Number(document.querySelector("#cap").value) || 0;
+const remaining = cap - total;
+document.querySelector("#stat-remaining").textContent = remaining.toFixed(2);
+const status = document.querySelector("#status");
+if (cap > 0 && remaining < 0) {
+    status.setAttribute("aria-live", "assertive");
+    status.textContent = "Over budget by " + Math.abs(remaining).toFixed(2);
+} else if (cap > 0) {
+    status.setAttribute("aria-live", "polite");
+    status.textContent = "Remaining: " + remaining.toFixed(2);
+}
 }
 
 function applySearch() {
@@ -67,6 +78,7 @@ document.querySelector("#sort-desc").addEventListener("click", () => {
     records.sort((a, b) => a.description.localeCompare(b.description));
     applySearch();
 })
+document.querySelector("#cap").addEventListener("input", updateStats);
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
