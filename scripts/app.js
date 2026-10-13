@@ -1,10 +1,19 @@
 import { isValidAmount, isValidDescription, isValidDate, isValidCategory, hasNoDuplicateWords} from "./validators.js";
 import { save, load } from "./storage.js";
+import { compileRegex } from "./search.js";
 
+const caseBox = document.querySelector("#case-insensitive");
+const searchInput = document.querySelector("#search");
 const form = document.querySelector("#record-form");
 const tbody = document.querySelector("#records-body");
 let records = load();
 render(records);
+
+function applySearch() {
+    const re = compileRegex(searchInput.value, caseBox.checked);
+    const shown = re ? records.filter(r => re.test(r.description)) : records;
+    render(shown);
+}
 
 function render(list) {
     tbody.innerHTML = "";
@@ -18,6 +27,9 @@ function render(list) {
         tbody.appendChild(tr);
     }
 }
+
+searchInput.addEventListener("input", applySearch);
+caseBox.addEventListener("change", applySearch);
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
