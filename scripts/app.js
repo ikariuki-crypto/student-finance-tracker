@@ -8,6 +8,12 @@ const form = document.querySelector("#record-form");
 const tbody = document.querySelector("#records-body");
 let records = load();
 render(records);
+updateStats();
+function updateStats() {
+    document.querySelector("#stat-count").textContent = records.length;
+    const total = records.reduce((sum, r) => sum + r.amount, 0);
+    document.querySelector("#stat-total").textContent = total.toFixed(2);
+}
 
 function applySearch() {
     const re = compileRegex(searchInput.value, caseBox.checked);
@@ -100,6 +106,7 @@ if (valid) {
 };
 records.push(record);
 save(records);
+updateStats();
 render(records);
     document.querySelector("#status").textContent = "Record is valid"
 }
