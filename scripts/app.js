@@ -80,6 +80,14 @@ document.querySelector("#sort-desc").addEventListener("click", () => {
 })
 document.querySelector("#cap").addEventListener("input", updateStats);
 
+document.querySelector("#export-btn").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(records, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "finance-records.json";
+    a.click();
+});
+
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     let valid = true;
