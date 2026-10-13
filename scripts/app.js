@@ -12,10 +12,14 @@ render(records);
 function applySearch() {
     const re = compileRegex(searchInput.value, caseBox.checked);
     const shown = re ? records.filter(r => re.test(r.description)) : records;
-    render(shown);
+    render(shown, re);
 }
 
-function render(list) {
+function escapeHtml(text) {
+    return text.replace(/&/g, "&amp;").replace(/</g, "&alt;").replace(/>/g, "&gt;");
+}
+
+function render(list, re) {
     tbody.innerHTML = "";
     for (const rec of list) {
         const tr = document.createElement("tr");
@@ -24,6 +28,9 @@ function render(list) {
             td.textContent = value;
             tr.appendChild(td);
         }
+    if (re) {
+        tr.children[1].innerHTML = escapeHtml(rec.description).replace(re, m => '<mark>&{m}</mark>');
+    }
         tbody.appendChild(tr);
     }
 }
