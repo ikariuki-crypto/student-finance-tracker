@@ -1,10 +1,10 @@
 import { isValidAmount, isValidDescription, isValidDate, isValidCategory, hasNoDuplicateWords} from "./validators.js";
+import { save, load } from "./storage.js";
 
 const form = document.querySelector("#record-form");
-
-let records = []
-
 const tbody = document.querySelector("#records-body");
+let records = load();
+render(records);
 
 function render(list) {
     tbody.innerHTML = "";
@@ -27,7 +27,7 @@ form.addEventListener("submit", (event) => {
     descError.textContent = "";
     if (!isValidDescription(description)) {
         descError.textContent = "No leading or trailing spaces.";
-        Valid = false;
+        valid = false;
     }
     if (!hasNoDuplicateWords(description)) {
         descError.textContent = "Found duplicate word! try again...";
@@ -65,6 +65,7 @@ if (valid) {
     updatedAt: new Date().toISOString()
 };
 records.push(record);
+save(records);
 render(records);
     document.querySelector("#status").textContent = "Record is valid"
 }
