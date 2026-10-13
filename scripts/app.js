@@ -2,6 +2,23 @@ import { isValidAmount, isValidDescription, isValidDate, isValidCategory, hasNoD
 
 const form = document.querySelector("#record-form");
 
+let records = []
+
+const tbody = document.querySelector("#records-body");
+
+function render(list) {
+    tbody.innerHTML = "";
+    for (const rec of list) {
+        const tr = document.createElement("tr");
+        for (const value of [rec.date, rec.description, rec.category, rec.amount]) {
+            const td = document.createElement("td");
+            td.textContent = value;
+            tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+    }
+}
+
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     let valid = true;
@@ -38,6 +55,17 @@ form.addEventListener("submit", (event) => {
         valid = false;
     }
 if (valid) {
+    const record = {
+    id: "rec_" + Date.now(),
+    description: description,
+    amount: Number(amount),
+    category: category,
+    date: date,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+};
+records.push(record);
+render(records);
     document.querySelector("#status").textContent = "Record is valid"
 }
 })
