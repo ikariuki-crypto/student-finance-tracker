@@ -13,6 +13,15 @@ function updateStats() {
     document.querySelector("#stat-count").textContent = records.length;
     const total = records.reduce((sum, r) => sum + r.amount, 0);
     document.querySelector("#stat-total").textContent = total.toFixed(2);
+    const counts = {};
+for (const r of records) {
+    counts[r.category] = (counts[r.category] || 0) + 1;
+}
+let top = "none";
+for (const cat in counts) {
+    if (top === "none" || counts[cat] > counts[top]) top = cat;
+}
+document.querySelector("#stat-top").textContent = top;
 }
 
 function applySearch() {
