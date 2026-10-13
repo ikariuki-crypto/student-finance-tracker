@@ -88,6 +88,34 @@ document.querySelector("#export-btn").addEventListener("click", () => {
     a.click();
 });
 
+document.querySelector("#import-btn").addEventListener("click", () => {
+    const file = document.querySelector("#import-file").files[0];
+    const status = document.querySelector("#status");
+    if (!file) { status.textContent = "Choose a file first."; return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+        try {
+            const data = JSON.parse(reader.result);
+            const ok = Array.isArray(data) && data.every(r =>
+                typeof r.id === "string" &&
+                isValidDescription(r.description) &&
+                isValidAmount(String(r.amount)) &&
+                isValidDate(r.date) &&
+                isValidCategory(r.category)
+            );
+            if (!ok) { status.textContent = "Import rejected: invalid structure."; return; }
+            records = data;
+            save(records);
+            render(records);
+            updateStats();
+            status.textContent = "Imported " + records.length + " records.";
+        } catch {
+            status.textContent = "Import rejected: not valid JSON.";
+        }
+    };
+    reader.readAsText(file);
+});
+
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     let valid = true;
