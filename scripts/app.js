@@ -16,7 +16,7 @@ function applySearch() {
 }
 
 function escapeHtml(text) {
-    return text.replace(/&/g, "&amp;").replace(/</g, "&alt;").replace(/>/g, "&gt;");
+    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 function render(list, re) {
@@ -29,7 +29,7 @@ function render(list, re) {
             tr.appendChild(td);
         }
     if (re) {
-        tr.children[1].innerHTML = escapeHtml(rec.description).replace(re, m => '<mark>&{m}</mark>');
+        tr.children[1].innerHTML = escapeHtml(rec.description).replace(re, m => `<mark>${m}</mark>`);
     }
         tbody.appendChild(tr);
     }
@@ -37,6 +37,21 @@ function render(list, re) {
 
 searchInput.addEventListener("input", applySearch);
 caseBox.addEventListener("change", applySearch);
+
+document.querySelector("#sort-amount").addEventListener("click", () => {
+    records.sort((a, b) => a.amount - b.amount);
+    applySearch();
+})
+
+document.querySelector("#sort-date").addEventListener("click",() => {
+    records.sort((a, b) => a.date.localeCompare(b.date));
+    applySearch();
+})
+
+document.querySelector("#sort-desc").addEventListener("click", () => {
+    records.sort((a, b) => a.description.localeCompare(b.description));
+    applySearch();
+})
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
