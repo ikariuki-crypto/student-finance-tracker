@@ -41,9 +41,9 @@ Search examples: `(coffee|tea)` with case-insensitive on, `\.\d{2}\b` for amount
 - Each input has been set with a visible label bound with for/id.
 - Clear and easily visible focus outlines on every focusable element.
 - Status and error messages are announced via aria-live / role="status".
-- Everything (add, edit, delete, search, settings) can fully be used with a keyboard alone.
+- Everything (add, delete, search, settings) can fully be used with a keyboard alone.
 - Colour contrast has been checked to meet WCAG AA
-- The Table becomes cards on small screens so nothing scrolls sideways
+- The table scrolls horizontally inside its container on small screens.
 
 ## How to run
 Open `index.html` via any static server (VS Code Live Preview) or the GitHub Pages link. No build step.
@@ -95,7 +95,7 @@ Base currency: KES Other currencies: RWF and EUR
 - Status and error messages are announced via aria-live / role="status".
 - Everything (add, edit, delete, search, settings) can fully be used with a keyboard alone.
 - Colour contrast has been checked to meet WCAG AA
-- The table scrolls horizontally inside its container or small screens.
+- The table scrolls horizontally inside its container on small screens.
 
 
 ### Wireframes
