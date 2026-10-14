@@ -2,7 +2,7 @@
 
 Live site: https://ikariuki-crypto.github.io/student-finance-tracker/
 Repo: https://github.com/ikariuki-crypto/student-finance-tracker
-Demo video: 
+Demo video: https://youtu.be/eaopn57lQow?si=tVFItd1XyL2dGM9w
 
 ## Theme
 Student Finance Tracker: log expenses, search them with regex, track spending against a monthly cap.
