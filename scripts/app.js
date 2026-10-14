@@ -57,6 +57,21 @@ function render(list, re) {
     if (re) {
         tr.children[1].innerHTML = escapeHtml(rec.description).replace(re, m => `<mark>${m}</mark>`);
     }
+    const actions = document.createElement("td");
+const del = document.createElement("button");
+del.type = "button";
+del.textContent = "Delete";
+del.addEventListener("click", () => {
+    if (confirm("Delete this record?")) {
+        records = records.filter(r => r.id !== rec.id);
+        save(records);
+        applySearch();
+        updateStats();
+        document.querySelector("#status").textContent = "Record deleted.";
+    }
+});
+actions.appendChild(del);
+tr.appendChild(actions);
         tbody.appendChild(tr);
     }
 }
@@ -165,6 +180,6 @@ records.push(record);
 save(records);
 updateStats();
 render(records);
-    document.querySelector("#status").textContent = "Record is valid"
+    document.querySelector("#status").textContent = "Record added"; form.reset();
 }
 })
