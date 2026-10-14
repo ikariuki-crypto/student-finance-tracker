@@ -1,3 +1,6 @@
+*  {
+    box-sizing :border-box;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -47,6 +50,29 @@ input, select {
 section {
     margin-bottom: 32px;
 }
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 6px;
+    text-align: left;
+}
+button {
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+button:hover {
+    background-color: #ddd;
+}
+/*Tablet,768px: stats in a row, inputs capped*/
 @media (min-width: 768px) {
     #dashboard {
         display: flex;
@@ -63,17 +89,10 @@ section {
         max-width: 400px;
     }
 }
+/*Desktop, 1024px:center the page*/
 @media (min-width: 1024px) {
     body {
         max-width: 1100px;
         margin: 0 auto;
     }
-}
-button {
-    padding: 8px 14px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-button:hover {
-    background-color: #ddd;
 }
