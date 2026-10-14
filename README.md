@@ -1,7 +1,8 @@
 # Student Finance Tracker
 
-Live site: [your GitHub Pages URL]
+Live site: https://ikariuki-crypto.github.io/student-finance-tracker/
 Repo: https://github.com/ikariuki-crypto/student-finance-tracker
+Demo video: 
 
 ## Theme
 Student Finance Tracker: log expenses, search them with regex, track spending against a monthly cap.
@@ -53,7 +54,7 @@ Open `tests.html` in the browser. Each line shows PASS or FAIL for one validator
 ## Known limitations
 - Date regex accepts non-existent dates such as 2026-02-29
 - Currency rates are stored but not yet applied to amounts
-- [anything else you didn't finish]
+- inline edit not implemented, 7-day chart not implemented.
 
 ## Milestones
 M1 spec and wireframes, M2 semantic HTML and CSS, M3 validation and tests, M4 render/sort/search, M5 stats and cap, M6 persistence and import/export, M7 polish.
@@ -94,7 +95,7 @@ Base currency: KES Other currencies: RWF and EUR
 - Status and error messages are announced via aria-live / role="status".
 - Everything (add, edit, delete, search, settings) can fully be used with a keyboard alone.
 - Colour contrast has been checked to meet WCAG AA
-- The Table becomes cards on small screens so nothing scrolls sideways
+- The table scrolls horizontally inside its container or small screens.
 
 
 ### Wireframes
